@@ -1,0 +1,218 @@
+@use "sass:map";
+@import "./variables";
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 15px;
+  line-height: 1.5;
+
+  /* width */
+  ::-webkit-scrollbar {
+    width: 3px;
+    height: 3px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    border-right: 0.819847px solid var(--backgroundColor);
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: var(--primaryColor);
+    border-radius: 0.819847px;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--secondaryColor);
+  }
+
+  *,
+  *:before,
+  *:after {
+    box-sizing: border-box;
+    outline: none;
+  }
+}
+
+// Styles used across all themes, uses theme variables
+.app {
+  width: 100vw;
+  min-width: 100%;
+  height: 100vh;
+  background: var(--backgroundColor);
+  color: var(--textColor);
+  font-family: Roboto, sans-serif;
+  padding-top: 55px;
+  padding-bottom: 20px;
+  box-sizing: border-box;
+  overflow-y: auto !important;
+
+  .light-bg {
+    background: var(--backgroundColorLight);
+  }
+
+  .container {
+    width: 1000px;
+    max-width: calc(100% - 40px);
+    margin: 0 auto;
+
+    &.fluid {
+      width: calc(100% - 10px);
+    }
+  }
+
+  .spacer {
+    flex-grow: 1 !important;
+  }
+
+  .btn {
+    background-color: var(--primaryColor);
+
+    &__outlined {
+      background-color: unset;
+      border-color: var(--primaryColor);
+    }
+
+    &:hover {
+      background-color: rgba(var(--primaryColorRGB), 0.9);
+    }
+
+    &__text {
+      background-color: unset;
+    }
+  }
+
+  @each $state in $states {
+    .btn--#{$state} {
+      background-color: var(--#{$state}Color);
+
+      &.btn__outlined {
+        background-color: unset;
+        border-color: var(--#{$state}Color);
+      }
+
+      &.btn__text {
+        background-color: unset;
+      }
+
+      &:hover {
+        background-color: rgba(var(--#{$state}ColorRGB), 0.8);
+      }
+    }
+  }
+
+  input {
+    background: var(--backgroundColor);
+    color: var(--textColor);
+    border: 0;
+  }
+
+  .rn__input {
+    border: 1px solid var(--borderColor);
+    background: var(--backgroundColor);
+    color: var(--textColor);
+
+    &:focus {
+      border-color: var(--primaryColor);
+    }
+  }
+
+  .active {
+    color: var(--primaryColor);
+  }
+
+  .disabled {
+    color: var(--disabledColor);
+  }
+
+  .clickable {
+    cursor: pointer;
+  }
+
+  .paper {
+    box-shadow: 0px 0px 100px -36px #7676768c;
+    padding: 15px;
+    border-radius: 20px;
+  }
+
+  .dialog__wrapper {
+    .dialog {
+      border: 1px solid var(--primaryColor);
+      background: var(--backgroundColorLight);
+    }
+
+    .actions {
+      background-color: var(--backgroundColorLight);
+      border: 1px solid var(--primaryColor);
+      border-left: 1px solid var(--backgroundColorLight);
+    }
+  }
+
+  .menu__wrapper {
+    .menu {
+      border: 1px solid var(--primaryColor);
+      background: var(--backgroundColorLight);
+    }
+  }
+
+  .workpart {
+    margin: 12px;
+    border: thin solid rgba(0, 0, 0, 0.12);
+  }
+
+  // text
+
+  ul,
+  ol {
+    padding: 0 1rem;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    line-height: 1.1;
+  }
+
+  code {
+    background-color: rgba(var(--codeColorLightRGB), 1);
+    color: var(--textColor);
+  }
+
+  pre {
+    background: var(--codeColorLight);
+    color: var(--textColor);
+    font-family: "JetBrainsMono", monospace;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+
+    code {
+      color: inherit;
+      padding: 0;
+      background: none;
+      font-size: 0.8rem;
+    }
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  blockquote {
+    padding-left: 1rem;
+    border-left: 2px solid rgba(var(--primaryColorRGB), 0.3);
+  }
+
+  hr {
+    border: none;
+    border-top: 2px solid rgba(var(--primaryColorRGB), 0.3);
+    margin: 2rem 0;
+  }
+}

@@ -1,0 +1,78 @@
+$colors: (
+  successColor: #22b85b,
+  errorColor: #ed4b4be6,
+  backgroundColor: #f5f5f5,
+  backgroundColorLight: #ffffff,
+  codeColorLight: #e4e4e4,
+  textColor: #222831,
+  primaryColor: #ffa500,
+  secondaryColor: #a45d5d,
+  disabledColor: #a0a0a0,
+  borderColor: #d9dbda,
+);
+
+$states: (success, error);
+
+@function hexToRGB($hex) {
+  @return red($hex), green($hex), blue($hex);
+}
+
+@mixin generate_colors($colors) {
+  // Colors, RGB Colors
+  @each $color, $value in $colors {
+    @if str-slice(#{$value}, 1, 1) == "#" {
+      --#{$color}: #{$value};
+      --#{$color}RGB: #{hexToRGB($value)};
+    } @else {
+      --#{$color}: var(--#{$value});
+      --#{$color}RGB: var(--#{$value}RGB);
+    }
+  }
+}
+
+:root {
+  @include generate_colors($colors);
+}
+
+// Margin and Padding Helper Generator
+$space: (
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  15,
+  20,
+  25,
+  30,
+  35,
+  40,
+  45,
+  50,
+  75,
+  100
+);
+$pos: (top, bottom, left, right);
+
+@each $s in $space {
+  .m-#{$s} {
+    margin: #{$s}rem;
+  }
+  .p-#{$s} {
+    margin: #{$s}rem;
+  }
+  @each $p in $pos {
+    .m#{str-slice($p, 0, 1)}-#{$s} {
+      margin-#{$p}: #{$s}rem;
+    }
+    .p#{str-slice($p, 0, 1)}-#{$s} {
+      padding-#{$p}: #{$s}rem;
+    }
+  }
+}
